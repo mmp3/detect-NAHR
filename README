@@ -1,0 +1,62 @@
+REQUIREMENTS:
+
+	NAHR_finder must be run on compute nodes that are MPI-enabled and have a CUDA-capable GPU.
+	Additionally, NAHR_finder utilizes the following packages.
+
+	CUDA >= 5.5
+	BOOST C++ libraries >= 1.55
+		with additional packages: serialization, mpi, system, filesystem, statistical distributions
+	GMP
+	MPFR
+	MPFRC++
+	GMPFRXX
+	BAMtools
+	MATLAB
+
+
+
+
+INSTALLATION:
+
+	After installing the required packages, the "makefile" must be manually changed to link to these packages.
+	Then, you need simply run:
+			make
+	
+
+
+USAGE:
+	detect-NAHR  [options] 
+
+	options:
+	-d	a database of segmental duplications (SDs) in the reference genome and pairwise alignments amongst homologous SDs.
+		[the default database that comes with this package is for hg19 (human).]
+	-R	haploid reference genome fasta file prefix for each chromsome [default: hg19_chr]
+	-b	input BAM file of paired-end reads aligned to the reference genome
+	-s	path to a temporary directory for temporary files
+	-o	output directory
+	-varpos		path to a directory which contains a file for each chromosome,
+			where each file contains all of the positions in that chromosmome that are on an SD
+			and are a variational position.
+	-l	length of reference genome [default: 3190491286 for hg19]
+	-e	base error-rate for the paired-end reads.  Context-specific error-rates adjustments will be made
+		against this base error rate.  [default:  0.01]
+	-p	a priori probability of no NAHR or gene conversion event occurring at a given locus [default: 0.999999]
+	-compute_size	comma-separated pair of integers.  Connected components will be selected for computation
+			if their compute size is within this range.  [default:  0,7000]
+	-alpha	read-depth variance factor. (Let u_R = expected read-depth of a region R.  Then the likelihood of
+		observing n reads from region R is N(n ; u_R, sigma^2) where sigma^2 := u_R * (1+alpha)  [default:  0.01]
+	-samples	number of samples from posterior distribution to draw to estimate posterior probabilities.
+	-vs	path to directory containing visitation schedules for connected components
+	-gender_and_pop		file containing tab-delimited information about the gender and population of the individual
+				sequenced in the BAM file.
+	-G	name of individual.
+	
+
+
+	
+	
+
+
+CONTACT:
+
+	Please direct all questions and problems to:  matthew_parks@alumni.brown.edu
